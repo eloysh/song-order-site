@@ -77,7 +77,7 @@ function Slider({ before, after, afterVideo = null, afterPoster = null, label, r
   return (
     <div className="relative group rounded-2xl overflow-hidden card-glass">
       <Frame ratio={ratio} boxRef={boxRef}>
-        <ImgFallback src={before} fallback="/demo_before_bw.jpg" alt="До" className="absolute inset-0 w-full h-full object-cover" />
+        <ImgFallback src={before} fallback="/demo_before_bw.jpg" alt={props.beforeAlt || "До"} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - x}% 0 0)` }}>
           {afterVideo && !videoError ? (
             <>
@@ -132,7 +132,7 @@ function Slider({ before, after, afterVideo = null, afterPoster = null, label, r
               )}
             </>
           ) : (
-            <ImgFallback src={after} fallback="/demo_after_color.jpg" alt="После" className="absolute inset-0 w-full h-full object-cover" />
+            <ImgFallback src={after} fallback="/demo_after_color.jpg" alt={props.afterAlt || "После"} className="absolute inset-0 w-full h-full object-cover" />
           )}
         </div>
 
@@ -157,23 +157,75 @@ function Slider({ before, after, afterVideo = null, afterPoster = null, label, r
 
 export default function Showcase() {
    const items = [
-    { before: "/works/01_before.jpg", after: "/works/01_after.jpg", label: "Цвет вместо ч/б" },
-    { before: "/works/02_before.jpg", after: "/works/02_after.jpg", label: "Чётче и ярче · Повышение резкости и цвета" },
-    { before: "/works/03_before.jpg", after: "/works/03_after.jpg", label: "Живая эмоция · Естественная улыбка и движение" },
-    { before: "/works/04_before.jpg", after: "/works/04_after.jpg", label: "Реставрация снимка · Удаление царапин и артефактов" },
-    { before: "/works/05_before.jpg", after: "/works/05_after.jpg", label: "Две фотографии — до/после" },
-    { before: "/works/011_before.jpg", after: "/works/011_after.jpg", label: "Реставрация снимка · Удаление царапин и артефактов" },
+    { 
+      before: "/works/01_before.jpg", 
+      after: "/works/01_after.jpg", 
+      label: "Песня для свадебного клипа",
+      beforeAlt: "Оригинальный клип без авторской музыки",
+      afterAlt: "Клип с уникальным саундтреком"
+    },
+    { 
+      before: "/works/02_before.jpg", 
+      after: "/works/02_after.jpg", 
+      label: "Авторский трек для рекламы",
+      beforeAlt: "Рекламный ролик без музыки",
+      afterAlt: "Ролик с профессиональным саундтреком"
+    },
+    { 
+      before: "/works/03_before.jpg", 
+      after: "/works/03_after.jpg", 
+      label: "Саундтрек для YouTube",
+      beforeAlt: "YouTube видео без музыкального сопровождения",
+      afterAlt: "Видео с авторской композицией"
+    },
+    { 
+      before: "/works/04_before.jpg", 
+      after: "/works/04_after.jpg", 
+      label: "Музыка для презентации",
+      beforeAlt: "Презентационное видео без звука",
+      afterAlt: "Презентация с фоновой музыкой"
+    },
+    { 
+      before: "/works/05_before.jpg", 
+      after: "/works/05_after.jpg", 
+      label: "Песня для Instagram",
+      beforeAlt: "Instagram Reels без музыки",
+      afterAlt: "Reels с авторским треком"
+    },
+    { 
+      before: "/works/011_before.jpg", 
+      after: "/works/011_after.jpg", 
+      label: "Корпоративный гимн",
+      beforeAlt: "Видео компании без музыки",
+      afterAlt: "Корпоративное видео с гимном"
+    },
   ];
 
   const vertical = [
-    { before: "/works/talk_before.jpg", after: "/works/talk_after.jpg", afterVideo: "/works/talk_after.mp4", afterPoster: "/works/talk_after_poster.jpg", label: "Говорит · Анимация лица" },
-    { before: "/works/06_before.jpg",   after: "/works/06_after.jpg",   afterVideo: "/works/06_after.mp4",   afterPoster: "/works/06_after_poster.jpg",   label: "Поёт · Синхронизация губ" },
+    { 
+      before: "/works/talk_before.jpg", 
+      after: "/works/talk_after.jpg", 
+      afterVideo: "/works/talk_after.mp4", 
+      afterPoster: "/works/talk_after_poster.jpg", 
+      label: "Песня для TikTok",
+      beforeAlt: "TikTok видео без звука",
+      afterAlt: "TikTok с авторской песней"
+    },
+    { 
+      before: "/works/06_before.jpg",   
+      after: "/works/06_after.jpg",   
+      afterVideo: "/works/06_after.mp4",   
+      afterPoster: "/works/06_after_poster.jpg",   
+      label: "Музыка для продающего видео",
+      beforeAlt: "Продающее видео без музыки",
+      afterAlt: "Видео с продающим саундтреком"
+    },
   ];
 
   return (
     <section id="showcase" className="reveal">
-      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-4">Память оживает — примеры</h2>
-      <p className="text-center text-slate-400 mb-4">Подборка готовых работ — лениво загружаемые видео и изображения.</p>
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-4">Примеры наших работ — авторская музыка и песни</h2>
+      <p className="text-center text-slate-400 mb-4">Готовые саундтреки и песни для разных типов видео: реклама, YouTube, презентации, свадьбы</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {items.map((it, i) => <Slider key={i} {...it} ratio="1:1" />)}

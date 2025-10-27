@@ -5,6 +5,7 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import SEOJsonLd from "../components/SEOJsonLd";
 import EntryOverlay from "../components/EntryOverlay";
 import BrandLogo from "../components/BrandLogo";
+import ServicesNav from "../components/ServicesNav";
 
 // Dynamic imports to reduce initial JS bundle on mobile/first paint
 const AudioList = dynamic(() => import('../components/AudioList'), { ssr: false, loading: () => <div className="text-center text-slate-500 py-6">Загрузка треков…</div> });
@@ -59,15 +60,98 @@ export default function Page() {
       "@type": "Organization",
       name: "AI Memories",
       url: base,
-      logo: base + "/images/og-cover.jpg"
+      logo: base + "/images/og-cover.jpg",
+      description: "Студия создания песен на заказ для видео, рекламы и личных событий",
+      email: "info@aimemories.ru",
+      telephone: "+79841933792",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+79841933792",
+        contactType: "customer service"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "AI Memories — Создание песен на заказ",
+      url: base,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: base + "/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: "Песня на заказ",
+      name: "Создание песни на заказ для видео",
+      description: "Профессиональное создание уникальных песен и саундтреков для видео, рекламы и роликов. Включает написание текста, музыки, аранжировку и студийную запись.",
+      provider: { 
+        "@type": "Organization", 
+        name: "AI Memories",
+        url: base
+      },
       areaServed: "RU",
-      provider: { "@type": "LocalBusiness", name: "AI Memories" },
-      url: base
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Услуги по созданию песен",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Создание песни на заказ",
+              description: "Написание уникальной песни с вашим текстом и профессиональной записью"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Саундтрек для видео",
+              description: "Создание саундтрека для рекламного или презентационного видео"
+            }
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Авторская композиция для ролика",
+              description: "Написание авторской музыки для видеороликов любого формата"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "Сколько времени занимает создание песни на заказ?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Стандартный срок создания песни — от 3 до 7 дней. Точные сроки зависят от сложности проекта и загруженности студии."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Что входит в стоимость создания песни?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "В стоимость входит написание текста, создание музыки, аранжировка, студийная запись вокала и передача всех прав на использование."
+          }
+        },
+        {
+          "@type": "Question",
+          name: "Можно ли внести правки в готовую песню?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Да, мы предоставляем возможность внесения правок в текст и музыку до финальной записи. После согласования демо-версии записывается финальная версия."
+          }
+        }
+      ]
     }
   ];
 
@@ -96,11 +180,15 @@ export default function Page() {
           <section className="container mx-auto px-4 py-16 reveal">
             <BrandLogo size={160} withWordmark className="mx-auto mb-6" />
             <h1 className="text-3xl md:text-5xl font-semibold text-center">
-              Оживляем воспоминания
+              Создание песни на заказ для видео
             </h1>
             <p className="text-center text-slate-300 mt-3 max-w-3xl mx-auto">
-              Превращаем ваши фотографии в трогательные видео-истории и пишем песни под вашу историю
+              Профессиональное создание уникальных песен и саундтреков для вашего видео: реклама, YouTube, презентации. От идеи до готового трека за 3-7 дней.
             </p>
+
+            <div className="mt-8">
+              <ServicesNav />
+            </div>
             <div className="mt-6 text-center">
               <WhatsAppButton className="mx-auto" />
             </div>
@@ -123,26 +211,34 @@ export default function Page() {
           </div>
 
           <section className="container mx-auto px-4 py-12 reveal">
-            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Демо-треки</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Примеры авторских песен и саундтреков</h2>
+            <p className="text-center text-slate-300 mb-8 max-w-3xl mx-auto">Послушайте примеры наших работ — уникальные песни и композиции, созданные для клиентов</p>
             <AudioList tracks={tracks} />
           </section>
 
           <div className="container mx-auto px-4 py-12 reveal">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Процесс создания песни для вашего видео</h2>
             <Scenes />
           </div>
 
-          <Pricing />
+          <section className="container mx-auto px-4 py-12 reveal">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Стоимость создания песни на заказ</h2>
+            <Pricing />
+          </section>
 
           <div className="container mx-auto px-4 py-12 reveal">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Рассчитать стоимость саундтрека</h2>
             <Calculator />
           </div>
 
           <div className="container mx-auto px-4 py-12 reveal">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Как заказать авторскую песню для видео</h2>
             <HowToOrder />
           </div>
 
           <section className="container mx-auto px-4 py-16 reveal">
-            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Заполните короткий бриф  для заказа песни</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-6">Заказать создание песни — заполните бриф</h2>
+            <p className="text-center text-slate-300 mb-8 max-w-3xl mx-auto">Расскажите о вашем проекте и получите персональное предложение</p>
             <BriefWizard />
           </section>
 
